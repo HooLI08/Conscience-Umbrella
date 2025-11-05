@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conscience Umbrella - 대여 신청</title>
+    <style>
+        body {
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+            background: linear-gradient(to bottom right, #36d1dc, #5b86e5);
+            color: white;
+            text-align: center;
+            padding-top: 100px;
+        }
+        input {
+            margin: 8px;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            background-color: white;
+            color: #5b86e5;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>우산 대여 신청</h2>
+    <p>이름과 학번을 입력해주세요</p>
+    <input type="text" id="name" placeholder="이름"><br>
+    <input type="text" id="studentId" placeholder="학번"><br>
+    <button onclick="register()">신청하기</button>
+
+    <p id="message"></p>
+
+    <script>
+        function register() {
+            let name = document.getElementById('name').value.trim();
+            let id = document.getElementById('studentId').value.trim();
+            let message = document.getElementById('message');
+
+            if (!name || !id) {
+                message.innerText = "이름과 학번을 모두 입력해주세요.";
+                return;
+            }
+
+            // localStorage를 사용해 현재 인원 수 저장
+            let count = localStorage.getItem('umbrellaCount');
+            if (!count) count = 0;
+            count = parseInt(count);
+
+            if (count >= 20) {
+                message.innerText = "죄송합니다. 이미 20명이 대여했습니다.";
+                return;
+            }
+
+            count++;
+            localStorage.setItem('umbrellaCount', count);
+            message.innerText = `${name}님, 대여가 완료되었습니다! (현재 ${count}/20명)`;
+        }
+    </script>
+</body>
+</html>
