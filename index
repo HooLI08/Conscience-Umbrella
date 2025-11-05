@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conscience Umbrella</title>
+<style>
+body { font-family: 'Noto Sans KR', sans-serif; text-align:center; background:#f0f6ff; }
+.container { margin-top:100px; }
+button { padding:15px 25px; font-size:18px; background:#0055ff; color:white; border:none; border-radius:8px; cursor:pointer; }
+button:disabled { background:gray; cursor:not-allowed; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>☔ Conscience Umbrella</h1>
+    <p>현재 남은 우산: <span id="count">20</span>개</p>
+    <button id="borrowBtn">우산 빌리기</button>
+  </div>
+
+<script>
+let umbrellaCount = 20;
+document.getElementById("borrowBtn").addEventListener("click", function() {
+  if (umbrellaCount > 0) {
+    umbrellaCount--;
+    document.getElementById("count").innerText = umbrellaCount;
+    alert("우산이 대여되었습니다.");
+  } else {
+    alert("죄송합니다. 현재 우산이 모두 대여되었습니다.");
+    this.disabled = true;
+  }
+});
+</script>
+</body>
+</html>
